@@ -15,7 +15,7 @@
             <tbody>
                 @foreach ($Tasklists as $task)
                 <tr>
-                    <td>{{ $task->id }}</td>
+                    <td>{!! link_to_route('Tasklists.show', $task->id, ['Tasklist' => $task->id]) !!}</td>
                     <td>{{ $task->content }}</td>
                 </tr>
                 @endforeach
@@ -23,5 +23,7 @@
         </table>
     @endif
     {{-- ToDo作成ページへのリンク --}}
-    {!! link_to_route('Tasklists.create', '新規ToDoの投稿', [], ['class' => 'btn btn-primary']) !!}
+    {!! link_to_route('Tasklists.create', '新規Taskの投稿', [], ['class' => 'btn btn-primary']) !!}
+
 @endsection
+

@@ -16,7 +16,6 @@ class TasksController extends Controller
     {
         $Tasklists = Task::all();
 
-        
         return view('Tasklists.index', [
             'Tasklists' => $Tasklists,
         ]);
@@ -45,7 +44,12 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Tasklists = new Task;
+
+        $Tasklists->content = $request->content;
+        $Tasklists->save();
+
+        return redirect('/');
     }
 
     /**
@@ -56,7 +60,11 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        //
+       $Tasklist = Task::findOrFail($id);
+
+        return view('Tasklists.show', [
+            'Tasklist' => $Tasklist,
+        ]);
     }
 
     /**
@@ -67,7 +75,12 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Tasklist = Task::findOrFail($id);
+
+        
+        return view('Tasklists.edit', [
+            'Tasklist' => $Tasklist,
+        ]);
     }
 
     /**
@@ -79,7 +92,12 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Tasklist = Task::findOrFail($id);
+        
+        $Tasklist->content = $request->content;
+        $Tasklist->save();
+
+        return redirect('/');
     }
 
     /**
@@ -90,6 +108,13 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $todolist = Task::findOrFail($id);
+        
+        $todolist->delete();
+
+        
+        return redirect('/');
     }
+
 }
